@@ -79,7 +79,7 @@ app.post("/",function(req,res){
     rawStr = req.body.rawStr;
     var s = rawStr.split(' '); // To search for records matching multiple words from the entered string in db
     s.forEach(convRegex) 
-    console.log(s);
+    // console.log(s);
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db("MyDatabase");
@@ -88,7 +88,7 @@ app.post("/",function(req,res){
           .find({$or: [{name: {$in: s}},{address: {$in: s}}] }) //searches in both the fields for matches 
           .toArray(function (err, result) {
             if (err) throw err;
-            console.log(result[0]);
+            // console.log(result);
             res.render('index.pug', {"rs":result});
             db.close();
           });
